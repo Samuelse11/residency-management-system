@@ -1,0 +1,90 @@
+<?php
+// Establecer el tipo de contenido como JSON primero
+header('Content-Type: application/json');
+
+// Manejar errores de PHP
+ini_set('display_errors', 0);
+ini_set('log_errors', 1);
+ini_set('error_log', 'php_errors.log');
+
+// Configuración de la base de datos
+$db_config = [
+    'host' => 'sql204.infinityfree.com',
+    'user' => 'if0_40393242',
+    'pass' => 'ZBCbazcIqTyh',
+    'name' => 'if0_40393242_residencia'
+];
+
+try {
+    // Validar método HTTP
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+        throw new Exception('Método no permitido', 405);
+    }
+
+    // Obtener el cuerpo de la solicitud
+    $json = file_get_contents('php://input');
+    if ($json === false) {
+        throw new Exception('Error al leer los datos de entrada');
+    }
+
+    // Decodificar JSON
+    $data = json_decode($json, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception('JSON inválido: ' . json_last_error_msg());
+    }
+
+    // Validar datos requeridos
+    if (!isset($data['id_alumno']) || !isset($data['asesores'])) {
+        throw new Exception('Datos incompletos: id_alumno y asesores son requeridos');
+    }
+
+    // Validar y limpiar datos
+    $id_alumno = filter_var($data['id_alumno'], FILTER_VALIDATE_INT);
+    if ($id_alumno === false || $id_alumno <= 0) {
+        throw new Exception('ID de alumno inválido');
+    }
+
+    $asesores = trim($data['asesores']);
+    if (empty($asesores)) {
+        throw new Exception('La lista de asesores no puede estar vacía');
+    }
+
+    // Validar cantidad de asesores
+    $asesoresArray = array_filter(array_map('trim', explode(',', $asesores)));
+    if (count($asesoresArray) < 3) {
+        throw new Exception('Debe proporcionar al menos 3 asesores');
+    }
+    if (count($asesoresArray) > 3) {
+        throw new Exception('Solo puede proporcionar máximo 3 asesores');
+    }
+
+    // Conectar a la base de datos
+    $conn = new mysqli($db_config['host'], $db_config['user'], $db_config['pass'], $db_config['name']);
+    if ($conn->connect_error) {
+        throw new Exception('Error de conexión a la base de datos: ' . $conn->connect_error);
+    }
+
+
+
+    // Éxito
+    echo json_encode([
+        'success' => true,
+        'message' => 'Asesores guardados correctamente'
+    ]);
+
+} catch (Exception $e) {
+    // Registrar error
+    error_log('Error en guardar_asesores.php: ' . $e->getMessage());
+    
+    // Responder con error en formato JSON
+    http_response_code($e->getCode() >= 400 && $e->getCode() < 600 ? $e->getCode() : 500);
+    echo json_encode([
+        'success' => false,
+        'message' => $e->getMessage()
+    ]);
+} finally {
+    // Cerrar conexiones si existen
+    if (isset($stmt)) $stmt->close();
+    if (isset($conn)) $conn->close();
+}
+?>

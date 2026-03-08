@@ -1,0 +1,8 @@
+[20-May-2025 02:24:16 Europe/Berlin] Error en guardar_asesores.php: Unknown column 'asesores' in 'field list'
+[20-May-2025 02:31:44 Europe/Berlin] Error en guardar_asesores.php: Unknown column 'asesores' in 'field list'
+[20-May-2025 02:31:58 Europe/Berlin] Error en guardar_asesores.php: Unknown column 'asesores' in 'field list'
+[20-May-2025 02:33:20 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: The number of variables must match the number of parameters in the prepared statement in C:\xampp\htdocs\proy\guardar_asesores.php:75
+Stack trace:
+#0 C:\xampp\htdocs\proy\guardar_asesores.php(75): mysqli_stmt->bind_param('si', 'Migue, Carmen, ...', 220112153)
+#1 {main}
+  thrown in C:\xampp\htdocs\proy\guardar_asesores.php on line 75
