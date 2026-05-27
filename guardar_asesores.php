@@ -9,10 +9,10 @@ ini_set('error_log', 'php_errors.log');
 
 // Configuración de la base de datos
 $db_config = [
-    'host' => 'sql204.infinityfree.com',
-    'user' => 'if0_40393242',
-    'pass' => 'ZBCbazcIqTyh',
-    'name' => 'if0_40393242_residencia'
+    'host' => '',
+    'user' => '',
+    'pass' => '',
+    'name' => ''
 ];
 
 try {
