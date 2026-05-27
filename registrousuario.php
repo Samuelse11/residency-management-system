@@ -5,10 +5,10 @@ $email = $_POST['email'];
 $password = $_POST['password'];
 
 // Detalles de la conexión a la base de datos
-$servername = "sql204.infinityfree.com";
-$username = "if0_40393242";
-$password_db = "ZBCbazcIqTyh";
-$dbname = "if0_40393242_residencia";
+$servername = "";
+$username = "";
+$password_db = "";
+$dbname = "";
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password_db, $dbname);
