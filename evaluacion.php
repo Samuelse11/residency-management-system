@@ -1,9 +1,9 @@
 <?php
 function conectarBD() {
-    $servidor = "sql204.infinityfree.com";
-    $usuario = "if0_40393242";
-    $contrasena = "ZBCbazcIqTyh";
-    $basedatos = "if0_40393242_residencia";
+    $servidor = "";
+    $usuario = "";
+    $contrasena = "";
+    $basedatos = "";
 
     
     $conexion = new mysqli($servidor, $usuario, $contrasena, $basedatos);
