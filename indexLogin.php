@@ -8,10 +8,10 @@ if(isset($_COOKIE['remember_email']) && isset($_COOKIE['remember_password']) && 
     
     // Conexión a la base de datos para verificar las credenciales
     $db_config = [
-        'host' => 'sql204.infinityfree.com',
-    'user' => 'if0_40393242',
-    'pass' => 'ZBCbazcIqTyh',
-    'name' => 'if0_40393242_residencia'
+        'host' => '',
+    'user' => '',
+    'pass' => '',
+    'name' => ''
     ];
     
     $conn = new mysqli($db_config['host'], $db_config['user'], $db_config['pass'], $db_config['name']);
