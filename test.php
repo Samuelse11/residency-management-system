@@ -1,10 +1,10 @@
 <?php
 // Conexión a la base de datos
 $db_config = [
-    'host' => 'localhost',
-    'user' => 'root',
-    'pass' => '12345',
-    'name' => 'residencia'
+    'host' => '',
+    'user' => '',
+    'pass' => '',
+    'name' => ''
 ];
 
 $conn = new mysqli($db_config['host'], $db_config['user'], $db_config['pass'], $db_config['name']);
